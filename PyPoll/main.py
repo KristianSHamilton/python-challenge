@@ -33,7 +33,10 @@ with open(csvPath) as csvFile:
     for candidateName in candidateList:
         #calcs percentage of votes for each candidate, x 100 to go from decimal to percentage
         votePercentage[candidateName] = candidateVote[candidateName] / totalVotes * 100
-
+        if candidateVote[candidateName] > winningTotal
+            winningTotal = candidateVote[candidateName]
+            winningName = candidateName
+            
 
 
 #writes output to file
@@ -55,3 +58,5 @@ with open(Vote_Analysis_Export, "w") as txt_file:
         print(electionPrint)
         
         txt_file.write(electionPrint)
+    
+    electionWinner = 
