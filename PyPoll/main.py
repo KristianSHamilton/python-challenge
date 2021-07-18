@@ -3,7 +3,7 @@ import csv
 
 candidateList = []
 totalVotes =  0
-candidateVote = 0
+candidateVote = {}
 
 csvPath = os.path.join( ".","Resources","election_data.csv")
 Vote_Analysis_Export = os.path.join(".", "Analysis","Vote_Analysis.txt")
@@ -12,10 +12,9 @@ Vote_Analysis_Export = os.path.join(".", "Analysis","Vote_Analysis.txt")
 with open(csvPath) as csvFile: 
 
     csvReader = csv.reader(csvFile, delimiter = ",")
-    
+    #read header
     csvHeader = next(csvReader)
-    
-    print(csvHeader)  
+     
 
     for row in csvReader: 
         
@@ -25,10 +24,12 @@ with open(csvPath) as csvFile:
         if candidateName not in candidateList:
             
             candidateList.append(candidateName)
+            candidateVote[candidateName] = 0
     
-#    candidateVote(candidateName) = candidateVote(candidateName) + 1
+        candidateVote[candidateName] = candidateVote[candidateName] + 1
 
 
+print(candidateVote)
 output = (
 #"Financial Analysis\n"
 #"-----------------------------\n"
