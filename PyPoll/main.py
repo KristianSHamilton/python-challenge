@@ -28,8 +28,9 @@ with open(csvPath) as csvFile:
     
         candidateVote[candidateName] = candidateVote[candidateName] + 1
 
+    for candidateName in candidateList:
+        print(f"{candidateName}: {candidateVote[candidateName]} votes")
 
-print(candidateVote)
 output = (
 #"Financial Analysis\n"
 #"-----------------------------\n"
