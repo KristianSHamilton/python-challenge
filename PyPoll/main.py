@@ -27,9 +27,13 @@ with open(csvPath) as csvFile:
             candidateVote[candidateName] = 0
     
         candidateVote[candidateName] = candidateVote[candidateName] + 1
-
+    
+    #prints voting stats for each candidate within the candidate list
     for candidateName in candidateList:
-        print(f"{candidateName}: {candidateVote[candidateName]} votes")
+        #calcs percentage of votes for each candidate, x 100 to go from decimal to percentage
+        votePercentage = candidateVote[candidateName] / totalVotes * 100
+        #prints stats, votePercentage casted as integer to round decimal places to whole number
+        print(f"{candidateName}: {int(votePercentage)}% ({candidateVote[candidateName]} votes)")
 
 output = (
 #"Financial Analysis\n"
