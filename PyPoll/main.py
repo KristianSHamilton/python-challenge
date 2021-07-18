@@ -5,7 +5,7 @@ candidateList = []
 totalVotes =  0
 candidateVote = {}
 votePercentage = {}
-
+winningTotal = 0
 
 csvPath = os.path.join( ".","Resources","election_data.csv")
 Vote_Analysis_Export = os.path.join(".", "Analysis","Vote_Analysis.txt")
@@ -33,9 +33,9 @@ with open(csvPath) as csvFile:
     for candidateName in candidateList:
         #calcs percentage of votes for each candidate, x 100 to go from decimal to percentage
         votePercentage[candidateName] = candidateVote[candidateName] / totalVotes * 100
-        if candidateVote[candidateName] > winningTotal
+        if candidateVote[candidateName] > winningTotal :
             winningTotal = candidateVote[candidateName]
-            winningName = candidateName
+            winner = candidateName
             
 
 
@@ -59,4 +59,9 @@ with open(Vote_Analysis_Export, "w") as txt_file:
         
         txt_file.write(electionPrint)
     
-    electionWinner = 
+    electionWinner = (f"-----------------------------\n"
+                      f"Winner: {winner}\n"
+                      f"-----------------------------\n")
+    print(electionWinner)
+    
+    txt_file.write(electionWinner)
