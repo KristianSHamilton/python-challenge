@@ -4,6 +4,8 @@ import csv
 candidateList = []
 totalVotes =  0
 candidateVote = {}
+votePercentage = {}
+
 
 csvPath = os.path.join( ".","Resources","election_data.csv")
 Vote_Analysis_Export = os.path.join(".", "Analysis","Vote_Analysis.txt")
@@ -28,25 +30,28 @@ with open(csvPath) as csvFile:
     
         candidateVote[candidateName] = candidateVote[candidateName] + 1
     
-    #prints voting stats for each candidate within the candidate list
     for candidateName in candidateList:
         #calcs percentage of votes for each candidate, x 100 to go from decimal to percentage
-        votePercentage = candidateVote[candidateName] / totalVotes * 100
-        #prints stats, votePercentage casted as integer to round decimal places to whole number
-        print(f"{candidateName}: {int(votePercentage)}% ({candidateVote[candidateName]} votes)")
+        votePercentage[candidateName] = candidateVote[candidateName] / totalVotes * 100
 
-output = (
-#"Financial Analysis\n"
-#"-----------------------------\n"
-f"Total Votes: {totalVotes}\n"
-#f"Total Profit: ${}\n"
-#f"Average Change: ${}\n"
-#f"Greatest Increase in Profits: ${}\n"
-#f"Greatest Decrease in Profits: ${}"
-)
 
-print(output)
 
 #writes output to file
 with open(Vote_Analysis_Export, "w") as txt_file:
-    txt_file.write(output)
+    
+    electionHeader = (f"Election Results\n"
+                    f"-----------------------------\n"
+                    f"Total Votes: {totalVotes}\n")
+    
+    print(electionHeader)
+    
+    txt_file.write(electionHeader)
+    
+    for candidateName in candidateList:
+        
+        #prints stats, votePercentage casted as integer to round decimal places to whole number
+        electionPrint = f"{candidateName}: {int(votePercentage[candidateName])}% ({candidateVote[candidateName]} votes)\n"
+                         
+        print(electionPrint)
+        
+        txt_file.write(electionPrint)
