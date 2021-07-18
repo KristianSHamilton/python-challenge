@@ -9,7 +9,8 @@ profitDeltaTotal = 0
 profitDeltaGreatest = 0
 profitDeltaLeast = 0
 
-csvPath = os.path.join( ".","budget_data.csv")
+csvPath = os.path.join( ".","Resources","budget_data.csv")
+Financial_Analysis_Export = os.path.join(".", "Analysis","Financial_Analysis.txt")
 
 #Read CSV from path
 with open(csvPath) as csvFile: 
@@ -18,9 +19,8 @@ with open(csvPath) as csvFile:
     
     csvHeader = next(csvReader)
     
-    #skip headers in first row
+    #skip headers in first row set data accordingly
     firstRow = next(csvReader)
-    profitDeltaTotal = int(firstRow[1])
     profitPrior = int(firstRow[1])
     monthsTotal = 1
     profitTotal = int(firstRow[1])
@@ -43,13 +43,21 @@ with open(csvPath) as csvFile:
         if profitDelta < profitDeltaLeast:
             profitDeltaLeast = profitDelta
 
+# calc average change by dividing profit Delta by monthsTotal - 1 to account for nonexistent change on first month
+avgChange = profitDeltaTotal/(monthsTotal - 1)
 
-avgChange = profitDeltaTotal/monthsTotal
+output = (
+"Financial Analysis\n"
+"-----------------------------\n"
+f"Total Months: {monthsTotal}\n"
+f"Total Profit: ${profitTotal}\n"
+f"Average Change: ${avgChange}\n"
+f"Greatest Increase in Profits: ${profitDeltaGreatest}\n"
+f"Greatest Decrease in Profits: ${profitDeltaLeast}"
+)
 
-print("Financial Analysis")
-print("-----------------------------")
-print(f"Total Months: {monthsTotal}")
-print(f"Total Profit: ${profitTotal}")
-print(f"Average Change: ${avgChange}")
-print(f"Greatest Increase in Profits: ${profitDeltaGreatest}")
-print(f"Greatest Decrease in Profits:  ${profitDeltaLeast}")
+print(output)
+
+#writes output to file
+with open(Financial_Analysis_Export, "w") as txt_file:
+    txt_file.write(output)
