@@ -1,7 +1,8 @@
 import os
 import csv
 
-
+candidateList = []
+totalVotes =  0
 
 csvPath = os.path.join( ".","Resources","election_data.csv")
 Vote_Analysis_Export = os.path.join(".", "Analysis","Vote_Analysis.txt")
@@ -13,16 +14,22 @@ with open(csvPath) as csvFile:
     
     csvHeader = next(csvReader)
     
-  
-    
-#    for row in csvReader:
-       
+    print(csvHeader)  
+
+    for row in csvReader: 
+        
+        candidateName = row[2]
+        totalVotes = totalVotes + 1
+        if candidateName not in candidateList:
+            
+            candidateList.append(candidateName)
+        
 
 
-output = ("test"
+output = (
 #"Financial Analysis\n"
 #"-----------------------------\n"
-#f"Total Months: {}\n"
+f"Total Votes: {totalVotes}\n"
 #f"Total Profit: ${}\n"
 #f"Average Change: ${}\n"
 #f"Greatest Increase in Profits: ${}\n"
